@@ -115,7 +115,7 @@ def create_parser():
                         type=str,
                         default=r'/data/Lora/sf7_125k',
                         help='Choose the root path to rf signals.',
-                        choices=['/data/Lora/sf10_125k', '/data/Lora/sf7_125k'])
+                        choices=['/data/Lora/sf10_125k', '/data/Lora/sf8_125k', '/data/Lora/sf7_125k'])
 
     parser.add_argument('--network', type=str, default='end2end', choices=['end2end', 'end2end_fig4', 'end2end_real'])
 

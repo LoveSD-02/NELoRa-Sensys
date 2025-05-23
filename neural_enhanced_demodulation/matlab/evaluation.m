@@ -10,10 +10,10 @@ set(fig,'DefaultAxesFontWeight','bold');
 data_root = '';
 color_list = linspecer(2);
 BW=125000;
-SF=10;
+SF=8;
 
 SNR_list=[-30:15];
-nelora_file='evaluation/sf10_v1_';
+nelora_file='evaluation/sf7_v1_';
 
 SNR_list_baseline=-30:0;
 baseline_file='evaluation/baseline_error_matrix_';

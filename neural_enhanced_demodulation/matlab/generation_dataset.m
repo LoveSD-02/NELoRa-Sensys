@@ -10,7 +10,7 @@ close all;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Set your onw paths
-raw_data_dir='D:\Code\MTP\Nelora\NELoRa-Sensys\neural_enhanced_demodulation\matlab\data';
+raw_data_dir='D:\Code\MTP\Nelora\NELoRa-Sensys\symbol_generation\output\LoRa_db';
 generated_data_dir = '/data/Lora/';
 
 % load settings
@@ -24,7 +24,7 @@ raw_data_list=scan_dir(raw_data_dir);
 n_raw_data_list=length(raw_data_list);
 
 
-feature_dir = [generated_data_dir,'sf10_125k/'];
+feature_dir = [generated_data_dir,'sf7_125k/'];
 if ~exist(feature_dir,'dir')
     mkdir(feature_dir);
 end
@@ -46,7 +46,7 @@ for raw_data_index=1:n_raw_data_list
     %% generate chirp symbol with code word (between [0,2^SF))
     chirp_raw = io_read_iq(raw_data_name);
     
-    batch_index=str2num(raw_data_name_components{2});
+    batch_index=str2num(raw_data_name_components{5});
     symbol_index=str2num(raw_data_name_components{1});
     
     %% conventional signal processing

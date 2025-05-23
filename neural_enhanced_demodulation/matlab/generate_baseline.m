@@ -9,7 +9,7 @@ close all;
 % Output: The SNR-SER data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Set your own paths
-data_root = '';
+data_root = 'D:\Code\MTP\Nelora\NELoRa-Sensys\neural_enhanced_demodulation\';
 data_dir='/data/Lora/sf7_125k/';
 % generate multi-path signal
 Fs = param_configs(3);         % sample rate

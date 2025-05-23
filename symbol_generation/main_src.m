@@ -11,14 +11,14 @@ DEBUG = true;
 
 frame_len = 26 * nsamp;
 
-fileID = fopen('input/data_colllection_sf10', 'r');
+fileID = fopen('input/pt2', 'r');
 pre_data = io_read_line(fileID, 8*nsamp); % read 8 chirps 
 
 
 ex = 1;         % number of packets 
 instance = 1;
 
-while ~isempty(pre_data) && ex < 9
+while ~isempty(pre_data) && ex < 51
     % % Combining with pre_data for detection
     data = [pre_data, io_read_line(fileID, frame_len)];
     
@@ -73,7 +73,7 @@ while ~isempty(pre_data) && ex < 9
             value = mod((I / numel(z) * 2^SF), 2^SF);
             fprintf("Window[%d] freq = %.2f, value = %.2f, peak = %.2f\n", i, fidx(I), value, ma);
             % write file
-            filename = [num2str(i),'_',num2str(value),'_',num2str(SF),'_',num2str(BW),'_',num2str(instance)];
+            filename = sprintf('%d_%d_%d_%d_%d.mat', i, round(value), SF, BW, instance);
             io_write_iq([filepath,'woCFO/',filename], symb);
 
             % with CFO
