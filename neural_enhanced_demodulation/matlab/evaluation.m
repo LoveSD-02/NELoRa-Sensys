@@ -10,10 +10,10 @@ set(fig,'DefaultAxesFontWeight','bold');
 data_root = '';
 color_list = linspecer(2);
 BW=125000;
-SF=7;
+SF=10;
 
-SNR_list=[-25:15];
-nelora_file='evaluation/sf7_v1_';
+SNR_list=[-30:15];
+nelora_file='evaluation/sf10_v1_';
 
 SNR_list_baseline=-30:0;
 baseline_file='evaluation/baseline_error_matrix_';
@@ -34,7 +34,7 @@ error_matrix = a.error_matrix;
 plot(SNR_list_baseline,1-error_matrix,"-.*",'LineWidth',2,'color',color_list(2,:));
 hold on;
 
-legend('abs baseline','phs baseline')
+legend('NeLoRa','baseline')
 
 % legend('abs_baselineNELoRa','Baseline')
 xlabel('SNR (dB)'); % x label

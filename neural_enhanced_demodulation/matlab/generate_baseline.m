@@ -40,7 +40,7 @@ for BW=BW_list
             end
             raw_data_name_components = strsplit(feature_data_name(1:end-4),'_');
             
-            if (( ~ismember(str2num(raw_data_name_components{2}), SNR_list) || ~ismember(str2num(raw_data_name_components{5}), batch_list))
+            if ( ~ismember(str2num(raw_data_name_components{2}), SNR_list) || ~ismember(str2num(raw_data_name_components{5}), batch_list))
                 continue;
             end
             

@@ -50,6 +50,8 @@ def generate_dataset(root_path, data_dir, ratio_bt_train_and_test,
                      code_list, snr_list, bw_list, sf_list,
                      instance_list, sorting_type):
     data_src = os.path.join(root_path, data_dir)
+    files_train=[]
+    files_test=[]
     for _, _, files in os.walk(data_src):
         files_filtered = list(
             filter(
@@ -57,7 +59,7 @@ def generate_dataset(root_path, data_dir, ratio_bt_train_and_test,
                 (int(x[:-4].split('_')[1]) in snr_list) and
                 (int(x[:-4].split('_')[2]) in sf_list) and
                 (int(x[:-4].split('_')[3]) in bw_list) and
-                (int(x[:-4].split('_')[4]) in instance_list), files))
+                (int(x[:-4].split('_')[7]) in instance_list), files))
         if sorting_type != 0:
             files_filtered.sort(
                 key=lambda x: (int(x[:-4].split('_')[sorting_type]), float(x[:-4].split('_')[0])))

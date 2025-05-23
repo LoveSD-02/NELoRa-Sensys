@@ -105,17 +105,17 @@ def create_parser():
     parser.add_argument(
         '--root_path',
         type=str,
-        default='./',
+        default=r'D:\Code\MTP\Nelora\NELoRa-Sensys',
         help='Choose the root path to the code.')
     parser.add_argument('--evaluations_dir',
                         type=str,
-                        default='evaluations',
+                        default=r'D:\Code\MTP\Nelora\NELoRa-Sensys\neural_enhanced_demodulation\matlab\evaluation',
                         help='Choose the root path to rf signals.')
     parser.add_argument('--data_dir',
                         type=str,
-                        default='/data/Lora/sf7_125k',
+                        default=r'/data/Lora/sf7_125k',
                         help='Choose the root path to rf signals.',
-                        choices=['/data/Lora/sf7_125k'])
+                        choices=['/data/Lora/sf10_125k', '/data/Lora/sf7_125k'])
 
     parser.add_argument('--network', type=str, default='end2end', choices=['end2end', 'end2end_fig4', 'end2end_real'])
 
@@ -131,7 +131,7 @@ def create_parser():
                         nargs='+',
                         default=[round(i, 1) for i in list(np.arange(0, 128, 0.1))],
                         type=float)
-    parser.add_argument("--snr_list", nargs='+', default=list(range(-25, 16)), type=int)  # for train: -25:0, test: -40, 16
+    parser.add_argument("--snr_list", nargs='+', default=list(range(-30, 16)), type=int)  # for train: -25:0, test: -40, 16
     parser.add_argument(
         "--bw_list",
         nargs='+',
@@ -140,7 +140,7 @@ def create_parser():
     parser.add_argument(
         "--sf_list",
         nargs='+',
-        default=[7],
+        default=[7,8,10],
         type=int)
     parser.add_argument(
         "--instance_list",

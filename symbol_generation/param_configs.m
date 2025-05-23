@@ -1,7 +1,7 @@
 function par = param_configs(p_id)
 
     % LoRa PHY transmitting parameters
-    LORA_SF = 12;            % LoRa spreading factor
+    LORA_SF = 10;            % LoRa spreading factor
     LORA_BW = 125e3;        % LoRa bandwidth
     
     % Receiving device parameters
