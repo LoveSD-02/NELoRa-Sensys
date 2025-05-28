@@ -10,13 +10,13 @@ set(fig,'DefaultAxesFontWeight','bold');
 data_root = '';
 color_list = linspecer(2);
 BW=125000;
-SF=8;
+SF=7;
 
 SNR_list=[-30:15];
 nelora_file='evaluation/sf7_v1_';
 
 SNR_list_baseline=-30:0;
-baseline_file='evaluation/baseline_error_matrix_';
+baseline_file='evaluation/baseline_error_matrix_1_';
 
 name_str=[nelora_file,num2str(SF),'_',num2str(BW),'.mat'];
 error_path = [data_root,name_str];

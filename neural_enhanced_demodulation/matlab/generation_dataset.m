@@ -24,7 +24,7 @@ raw_data_list=scan_dir(raw_data_dir);
 n_raw_data_list=length(raw_data_list);
 
 
-feature_dir = [generated_data_dir,'sf7_125k/'];
+feature_dir = [generated_data_dir,'sf7_125k_1/'];
 if ~exist(feature_dir,'dir')
     mkdir(feature_dir);
 end
@@ -38,15 +38,15 @@ for raw_data_index=1:n_raw_data_list
     raw_data_name=raw_data_list{raw_data_index};
     [pathstr,raw_data_name_whole,ext] = fileparts(raw_data_name);
     raw_data_name_components = strsplit(raw_data_name_whole,'_');
-    test_str=raw_data_name_components{1};
-    if strcmp(test_str,'demod')==1||strcmp(test_str,'pt')==1
+    test_str=raw_data_name_components{2};
+    if strcmp(test_str,'wCFO')==1||strcmp(test_str,'pt')==1
         continue;
     end
     [~,packet_index,~] = fileparts(pathstr);
     %% generate chirp symbol with code word (between [0,2^SF))
     chirp_raw = io_read_iq(raw_data_name);
     
-    batch_index=str2num(raw_data_name_components{5});
+    batch_index=str2num(raw_data_name_components{6});
     symbol_index=str2num(raw_data_name_components{1});
     
     %% conventional signal processing

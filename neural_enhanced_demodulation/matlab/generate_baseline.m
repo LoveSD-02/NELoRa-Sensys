@@ -9,8 +9,8 @@ close all;
 % Output: The SNR-SER data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Set your own paths
-data_root = 'D:\Code\MTP\Nelora\NELoRa-Sensys\neural_enhanced_demodulation\';
-data_dir='/data/Lora/sf7_125k/';
+data_root = 'D:\';
+data_dir='/data/Lora/sf7_125k_1/';
 % generate multi-path signal
 Fs = param_configs(3);         % sample rate
 upsamping_factor = param_configs(4);   
@@ -25,7 +25,7 @@ SNR_list=SNR_minimal:0;
 
 BW_list=[125000];
 SF_list=[7];
-batch_list=4:7;
+batch_list=1:7;
 
 for BW=BW_list
     for SF=SF_list
@@ -51,21 +51,26 @@ for BW=BW_list
             chirp_fft_raw =(fft(chirp_dechirp, nsamp*upsamping_factor));
             
             if abs_decode
-                chirp_peak_overlap=abs(chirp_abs_alias(chirp_fft_raw, Fs/BW));
+                z = chirp_abs_alias(chirp_fft_raw, Fs/BW);
+                chirp_peak_overlap=abs(z);
             else
-                chirp_peak_overlap = abs(chirp_comp_alias(chirp_fft_raw, Fs / BW));
+                z = chirp_comp_alias(chirp_fft_raw, Fs / BW);
+                chirp_peak_overlap = abs(z);
             end
 
             [pk_height_overlap,pk_index_overlap]=max(chirp_peak_overlap);
-            code_estimated=mod(2^SF-round(pk_index_overlap/upsamping_factor),2^SF);
+            % peak_i = I/(nfft/nsamp);
+            %mod((I / numel(z) * 2^SF), 2^SF);
+            code_estimated=mod(2^SF-round(pk_index_overlap/ numel(z) * 2^SF),2^SF);
+            code_estimated2=mod(round(pk_index_overlap/ numel(z) * 2^SF),2^SF);
             
             code_label=str2num(raw_data_name_components{6});
             
-            error_matrix(SNR_index,1)=  error_matrix(SNR_index,1)+(code_estimated==code_label);
+            error_matrix(SNR_index,1)=  error_matrix(SNR_index,1)+(code_estimated==code_label||code_estimated2==code_label);
             error_matrix_count(SNR_index,1)=error_matrix_count(SNR_index,1)+1;
         end
         error_matrix=error_matrix./error_matrix_count;
-        feature_path = [data_root, 'matlab/evaluation/','baseline_error_matrix_',num2str(SF),'_',num2str(BW),'.mat'];
+        feature_path = ['D:\Code\MTP\Nelora\NELoRa-Sensys\neural_enhanced_demodulation\', 'matlab/evaluation/','baseline_error_matrix_1_',num2str(SF),'_',num2str(BW),'.mat'];
         save(feature_path, 'error_matrix','SNR_list');
     end
 end
