@@ -105,7 +105,7 @@ def create_parser():
     parser.add_argument(
         '--root_path',
         type=str,
-        default=r'D:\Code\MTP\Nelora\NELoRa-Sensys',
+        default='./',
         help='Choose the root path to the code.')
     parser.add_argument('--evaluations_dir',
                         type=str,
@@ -113,9 +113,8 @@ def create_parser():
                         help='Choose the root path to rf signals.')
     parser.add_argument('--data_dir',
                         type=str,
-                        default=r'/data/Lora/sf7_125k',
-                        help='Choose the root path to rf signals.',
-                        choices=['/data/Lora/sf10_125k', '/data/Lora/sf8_125k', '/data/Lora/sf7_125k'])
+                        default=r'D:\data\Lora\sf7_125k_1',
+                        help='Choose the root path to rf signals.')
 
     parser.add_argument('--network', type=str, default='end2end', choices=['end2end', 'end2end_fig4', 'end2end_real'])
 
