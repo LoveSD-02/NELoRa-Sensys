@@ -254,6 +254,8 @@ def training_loop(training_dataloader_X, training_dataloader_Y, testing_dataload
         #########################################
         if iteration % 50 == 0:
             print("Iteration: {}/{}".format(iteration, opts.train_iters))
+        else:
+            print("Iteration: {}".format(iteration))
         fake_Y_spectrum = mask_CNN(images_X_spectrum)
         # 2. Compute the generator loss based on domain Y
         g_y_pix_loss = loss_spec(fake_Y_spectrum, images_Y_spectrum)
@@ -342,6 +344,9 @@ def training_loop(training_dataloader_X, training_dataloader_Y, testing_dataload
         test_right_case = to_data(test_right_case)
 
         for batch_index in range(opts.batch_size):
+            if batch_index >= len(snr_X_test_mapping):
+                    print(f"Skipping batch {batch_index}, out of bounds")
+                    continue
             try:
                 snr_index = opts.snr_list.index(snr_X_test_mapping[batch_index])
                 error_matrix[snr_index] += test_right_case[batch_index]
@@ -351,6 +356,7 @@ def training_loop(training_dataloader_X, training_dataloader_Y, testing_dataload
                                           labels_X_test_estimated[batch_index].cpu().data.int(),
                                           labels_X_test[batch_index].cpu().data.int()])
             except:
+                print(f"batch_index: {batch_index}, snr_X_test_mapping length: {len(snr_X_test_mapping)}")
                 print("Something else went wrong")
         if iteration % opts.log_step == 0:
             print('Testing Iteration [{:5d}/{:5d}]'
